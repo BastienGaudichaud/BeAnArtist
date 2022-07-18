@@ -10,8 +10,8 @@ import fr.eseo.poo.projet.artiste.vue.ihm.PanneauDessin;
 
 public class ActionDessiner extends AbstractAction {
 
+	private static final long serialVersionUID = 1L;
 	public static final String NOM_ACTION = "Dessiner";
-	private static final long serialVersionUID = -7969544781813047991L;
 	private PanneauDessin panneauDessin;
 	private PanneauBarreOutils panneauOutilsDessin;
 	private PanneauBarreOutils barreOutils;

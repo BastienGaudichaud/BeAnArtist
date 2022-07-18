@@ -7,8 +7,9 @@ import javax.swing.AbstractAction;
 import fr.eseo.poo.projet.artiste.vue.ihm.PanneauBarreOutils;
 
 public class ActionCacherDessin extends AbstractAction{
+	
+	private static final long serialVersionUID = 1L;
 	public static final String NOM_ACTION = "Cacher";
-	private static final long serialVersionUID = -7969544781813047991L;
 	private PanneauBarreOutils barreOutils;
 	private PanneauBarreOutils barreDessin;
 

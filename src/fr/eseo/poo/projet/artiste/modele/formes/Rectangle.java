@@ -5,45 +5,40 @@ import fr.eseo.poo.projet.artiste.modele.Remplissable;
 
 public class Rectangle extends Forme implements Remplissable {
 
+	private static final long serialVersionUID = 1L;
 	private boolean estRempli;
 
 	public Rectangle() {
 		super();
+		tailleMin = 1;
+		tailleMax = 2000;
 	}
 
 	public Rectangle(Coordonnees position) {
 		super(position);
+		tailleMin = 1;
+		tailleMax = 2000;
 	}
 
 	public Rectangle(double largeur, double hauteur) {
 		super(largeur, hauteur);
+		tailleMin = 1;
+		tailleMax = 2000;
+		setLargeur(largeur);
+		setHauteur(hauteur);
 	}
 
 	public Rectangle(Coordonnees position, double largeur, double hauteur) {
 		super(position, largeur, hauteur);
+		tailleMin = 1;
+		tailleMax = 2000;
+		setLargeur(largeur);
+		setHauteur(hauteur);
 	}
 
 	@Override
 	public boolean estRempli() {
 		return this.estRempli;
-	}
-
-	@Override
-	public void setLargeur(double largeur) {
-		if (largeur < 0) {
-			throw new IllegalArgumentException("Largeur négative !");
-		} else {
-			super.setLargeur(largeur);
-		}
-	}
-
-	@Override
-	public void setHauteur(double hauteur) {
-		if (hauteur < 0) {
-			throw new IllegalArgumentException("Largeur négative !");
-		} else {
-			super.setHauteur(hauteur);
-		}
 	}
 
 	@Override
@@ -63,10 +58,10 @@ public class Rectangle extends Forme implements Remplissable {
 
 	@Override
 	public boolean contient(Coordonnees coordonnees) {
-		return (coordonnees.getAbscisse() > getPosition().getAbscisse()
-				&& coordonnees.getAbscisse() < getPosition().getAbscisse() + getLargeur()
-				&& coordonnees.getOrdonnee() > getPosition().getOrdonnee()
-				&& coordonnees.getOrdonnee() < getPosition().getOrdonnee() + getHauteur());
+		return (coordonnees.getAbscisse() > getPosition().getAbscisse() - getEpaisseur() / 2.0
+				&& coordonnees.getAbscisse() < getPosition().getAbscisse() + getLargeur() + getEpaisseur() / 2.0
+				&& coordonnees.getOrdonnee() > getPosition().getOrdonnee() - getEpaisseur() / 2.0
+				&& coordonnees.getOrdonnee() < getPosition().getOrdonnee() + getHauteur() + getEpaisseur() / 2.0);
 	}
 
 	

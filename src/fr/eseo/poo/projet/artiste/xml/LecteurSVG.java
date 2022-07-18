@@ -6,7 +6,6 @@ import static javax.xml.xpath.XPathConstants.STRING;
 
 import java.awt.Color;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -38,36 +37,32 @@ import fr.eseo.poo.projet.artiste.vue.formes.VuePolygoneRegulier;
 import fr.eseo.poo.projet.artiste.vue.formes.VueRectangle;
 import fr.eseo.poo.projet.artiste.vue.formes.VueTexte;
 import fr.eseo.poo.projet.artiste.vue.formes.VueTrace;
+import fr.eseo.poo.projet.artiste.vue.ihm.PanneauDessin;
 
-/**
- * Un lecteur SVG est un processeur DOM/XPath responsable du chargement d'un
- * dessin au format SVG.
- * 
- * Les méthodes lisDessin et lisXxxx devront être complétées.
- * 
- */
 public class LecteurSVG {
 
 	private static final String POINTS2 = "@points";
 	private static final String FILL = "@fill";
-	/**
-	 * Evaluateur d'expressions XPath permettant de naviguer facilement dans le
-	 * document DOM.
-	 */
 	private XPath xpath = XPathFactory.newInstance().newXPath();
-
-	/**
-	 * Charge le fichier SVG donné dans un document DOM puis renvoie
-	 * l'intégralité du dessin sous la forme d'une liste de vues représentant
-	 * les formes stockées dans le fichier.
-	 * 
-	 * @param nomFichier le nom du fichier SVG
-	 * @return l'intégralité du dessin sous la forme d'une liste de vues
-	 * @throws FileNotFoundException si le fichier n'est pas trouvé ou
-	 *             accessible
-	 * @throws XPathExpressionException
-	 */
-	public List<VueForme> lisDessin(File fichier) throws FileNotFoundException, XPathExpressionException {
+	
+	/* Get the background colour from the document. */
+	public Color getFond(File fichier) throws XPathExpressionException{
+		Document document = new ChargeurDOM().chargeFile(fichier);
+		NodeList figures = (NodeList) xpath.evaluate("//svg/*", document, NODESET);
+		Node noeud = figures.item(0);
+		try {
+			String contenu = noeud.getTextContent();
+			contenu = contenu.replace("svg { background-color: ", "");
+			contenu = contenu.replace("; }", "");
+			return Color.decode(contenu);
+		}
+		catch (NumberFormatException e) {
+			return PanneauDessin.COULEUR_FOND_PAR_DEFAUT;
+		}
+	}
+	
+	/* Parse the document to recreate all the objects. */
+	public List<VueForme> lisDessin(File fichier) throws XPathExpressionException {
 		List<VueForme> dessin = new ArrayList<>();
 		Document document = new ChargeurDOM().chargeFile(fichier);
 		// L'expression XPath doit renvoyer les listes des noeuds DOM représentant toutes les formes
@@ -82,19 +77,13 @@ public class LecteurSVG {
 				dessin.add(vue);
 				vue.getForme().setCouleurContour(lisCouleur1(noeud));
 				vue.getForme().setCouleurRemplissage(lisCouleur2(noeud));
+				vue.getForme().setEpaisseur(lisEpaisseur(noeud));
 			}
 		}
 		return dessin;
 	}
 
-	/**
-	 * Crée une forme et sa vue associée réprésentées par le noeud DOM donné,
-	 * puis renvoie cette vue. Cette méthode invoque les méthodes lis<Forme>
-	 * définies pour chacune des <Forme> considérée.
-	 * 
-	 * @param noeud le noeud représentant la vue et sa forme
-	 * @return la vue stockée dans le noeud considéré
-	 */
+	/* Parse one particular object. */
 	public VueForme lisVueForme(Node noeud) throws XPathExpressionException {
 		VueForme vue = null;
 		switch (noeud.getNodeName()) {
@@ -122,7 +111,7 @@ public class LecteurSVG {
 						vue = new VueEtoile(lisEtoile(noeud));
 					}
 					else if(nom.equals("polygon")) {
-						vue =new VuePolygoneRegulier(lisPolygoneRegulier(noeud));
+						vue = new VuePolygoneRegulier(lisPolygoneRegulier(noeud));
 					}
 				break;
 			default:
@@ -135,18 +124,18 @@ public class LecteurSVG {
 		double x = (double) xpath.evaluate("@x", noeud, NUMBER);
 		double y = (double) xpath.evaluate("@y", noeud, NUMBER);
 		double taille= (double) xpath.evaluate("@font-size", noeud, NUMBER);
-		String phrase = (String) xpath.evaluate("//child::*", noeud, STRING);
-		String[] phrases;
-		phrases = phrase.split("\n");
-		phrases = phrases[1].split("\t");
-		Coordonnees position = new Coordonnees(x, y);
-		phrase=phrases[1];
-		phrase = phrase.replace("/", System.lineSeparator());
+		String phrase = noeud.getTextContent();
+		phrase = phrase.replace("\n", "");
+		phrase = phrase.replace("\t\t", "\n");
+		phrase = phrase.replace("\t", "");
+		phrase = phrase.replaceFirst("\n", "");
+		Coordonnees position = new Coordonnees(x, y - taille);
 		Texte texte= new Texte(position, phrase);
 		texte.setPolice((int)taille);
 		return texte;
 	}
 
+	
 	public Trace lisTrace(Node noeud) throws XPathExpressionException {
 		String points = (String) xpath.evaluate(POINTS2, noeud, STRING);
 		StringTokenizer tokenizer = new StringTokenizer(points, ", ");
@@ -163,12 +152,6 @@ public class LecteurSVG {
 		return trace;
 	}
 
-	/**
-	 * Renvoie la nouvelle ligne représentée par le noeud DOM donné.
-	 * 
-	 * @param noeud le noeud représentant la ligne
-	 * @return la ligne stockée dans le noeud considéré
-	 */
 	public Ligne lisLigne(Node noeud) throws XPathExpressionException {
 		double x1 = (double) xpath.evaluate("@x1", noeud, NUMBER);
 		double y1 = (double) xpath.evaluate("@y1", noeud, NUMBER);
@@ -196,12 +179,6 @@ public class LecteurSVG {
 		return rectangle;
 	}
 
-	/**
-	 * Renvoie une nouvelle ellipse représentée par le noeud DOM donné.
-	 * 
-	 * @param noeud le noeud représentant l'ellipse
-	 * @return l'ellipse stockée dans le noeud considéré
-	 */
 	public Ellipse lisEllipse(Node noeud) throws XPathExpressionException {
 		double cx = (double) xpath.evaluate("@cx", noeud, NUMBER);
 		double cy = (double) xpath.evaluate("@cy", noeud, NUMBER);
@@ -216,12 +193,6 @@ public class LecteurSVG {
 		return ellipse;
 	}
 
-	/**
-	 * Renvoie un nouveau cercle représenté par le noeud DOM donné.
-	 * 
-	 * @param noeud le noeud représentant le cercle
-	 * @return le cercle stocké dans le noeud considéré
-	 */
 	public Cercle lisCercle(Node noeud) throws XPathExpressionException {
 		double cx = (double) xpath.evaluate("@cx", noeud, NUMBER);
 		double cy = (double) xpath.evaluate("@cy", noeud, NUMBER);
@@ -234,12 +205,6 @@ public class LecteurSVG {
 		}
 		return cercle;	}
 
-	/**
-	 * Renvoie la nouvelle étoile représentée par le noeud DOM donné.
-	 * 
-	 * @param noeud le noeud représentant l'étoile
-	 * @return l'étoile stockée dans le noeud considéré
-	 */
 	public Etoile lisEtoile(Node noeud) throws XPathExpressionException {
 		String points = (String) xpath.evaluate(POINTS2, noeud, STRING);
 		StringTokenizer tokenizer = new StringTokenizer(points, ", ");
@@ -255,20 +220,6 @@ public class LecteurSVG {
 		return etoile;
 	}
 
-	/**
-	 * Renvoie une nouvelle étoile calculée à partir de la liste de ses
-	 * coordonnées.
-	 * 
-	 * Il faut "un peu" réflechir et donc s'aider du trio "feuille, stylo,
-	 * cerveau".
-	 * 
-	 * Indications : calculer les coordonnéeds du centre de l'étoile ; calculer
-	 * le(s) rayon(s) en utilisant la méthode Coordonnees.distanceVers ;
-	 * calculer le(s) angle(s) en utilisant la méthode Coordonnees.angleVers.
-	 * 
-	 * @param points La liste des coordonnées des points de l'étoile
-	 * @return L'étoile calculée à partir de la liste de ses coordonnées
-	 */
 	public Etoile calculeEtoile(List<Coordonnees> points) {
 		double centreX=0;
 		double centreY=0;
@@ -321,15 +272,6 @@ public class LecteurSVG {
 		return new PolygoneRegulier(position, taille, nombreDeCotes, anglePremierSommet);
 	}
 
-	/**
-	 * Convertis une couleur représentée par une chaîne de caractères en une
-	 * couleur compatible avec l'API Java. La chaîne en question est au format
-	 * "#RRVVBB" où RR représente la valeur héxadécimale de la composante rouge,
-	 * VV celle de la composante verte et BB celle de la composante bleue.
-	 * 
-	 * @param couleur la couleur représentée par une chaîne au format "#RRVVBB"
-	 * @return la couleur compatible avec l'API Java
-	 */
 	public Color lisCouleur1(Node noeud) throws XPathExpressionException {
 		String couleur = (String) xpath.evaluate("@stroke", noeud, STRING);
 		try {
@@ -350,4 +292,13 @@ public class LecteurSVG {
 		}
 	}
 
+	public int lisEpaisseur(Node noeud) throws XPathExpressionException {
+		int epaisseur;
+		try {
+			epaisseur = Integer.parseInt((String) xpath.evaluate("@stroke-width", noeud, STRING));
+			return epaisseur;
+		} catch (NumberFormatException | XPathExpressionException e) {
+			return Forme.EPAISSEUR_PAR_DEFAUT;
+		}
+	}
 }

@@ -1,10 +1,12 @@
 package fr.eseo.poo.projet.artiste.modele;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
-public class Coordonnees {
+public class Coordonnees implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	public static final double ABSCISSE_PAR_DEFAUT = 0;
 	public static final double ORDONNEE_PAR_DEFAUT = 0;
 	private double abscisse;

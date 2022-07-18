@@ -16,6 +16,7 @@ import fr.eseo.poo.projet.artiste.vue.ihm.PanneauDessin;
 
 public class ActionChoisirForme extends AbstractAction {
 
+	private static final long serialVersionUID = 1L;
 	public static final String NOM_ACTION_TEXTE = "Texte";
 	public static final String NOM_ACTION_CRAYON = "Crayon";
 	public static final String NOM_ACTION_LIGNE = "Ligne";
@@ -24,7 +25,6 @@ public class ActionChoisirForme extends AbstractAction {
 	public static final String NOM_ACTION_CERCLE = "Cercle";
 	public static final String NOM_ACTION_ETOILE = "Etoile";
 	public static final String NOM_ACTION_POLYGONE = "Polygone Régulier";
-	private static final long serialVersionUID = -3112433827204406287L;
 	private PanneauDessin panneauDessin;
 
 	public ActionChoisirForme(PanneauDessin panneauDessin, String action) {

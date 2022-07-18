@@ -9,8 +9,8 @@ import fr.eseo.poo.projet.artiste.vue.ihm.PanneauDessin;
 
 public class ActionEffacer extends AbstractAction {
 
+	private static final long serialVersionUID = 1L;
 	public static final String NOM_ACTION = "Effacer Tout";
-	private static final long serialVersionUID = 4753265740890908987L;
 	private PanneauDessin panneauDessin;
 
 	public ActionEffacer(PanneauDessin panneauDessin) {

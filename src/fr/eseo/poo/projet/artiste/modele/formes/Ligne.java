@@ -7,7 +7,7 @@ import fr.eseo.poo.projet.artiste.modele.Coordonnees;
 
 public class Ligne extends Forme {
 
-	public static final double EPSILON = 0.1;
+	private static final long serialVersionUID = 1L;
 
 	public Ligne() {
 		super();
@@ -62,10 +62,32 @@ public class Ligne extends Forme {
 
 	@Override
 	public boolean contient(Coordonnees coordonnees) {
-		double distanceC1 = Math.abs(getC1().distanceVers(coordonnees));
-		double distanceC2 = Math.abs(getC2().distanceVers(coordonnees));
-		double delta = Math.abs(distanceC2 + distanceC1 - perimetre());
-		return (delta < EPSILON);
+		double c1Abs = getC1().getAbscisse();
+		double c1Ord = getC1().getOrdonnee();
+		double c2Abs = getC2().getAbscisse();
+		double c2Ord = getC2().getOrdonnee();
+		if(c1Abs <= c2Abs) {
+			c1Abs -= getEpaisseur() / 2.0;
+			c2Abs += getEpaisseur() /2.0;
+		}
+		else {
+			c1Abs += getEpaisseur() / 2.0;
+			c2Abs -= getEpaisseur() /2.0;
+		}
+		if(c1Ord <= c2Ord) {
+			c1Ord -= getEpaisseur() / 2.0;
+			c2Ord += getEpaisseur() /2.0;
+		}
+		else {
+			c1Ord += getEpaisseur() / 2.0;
+			c2Ord -= getEpaisseur() /2.0;
+		}
+		Coordonnees c1 = new Coordonnees(c1Abs, c1Ord);
+		Coordonnees c2 = new Coordonnees(c2Abs, c2Ord);
+		double distanceC1 = Math.abs(c1.distanceVers(coordonnees));
+		double distanceC2 = Math.abs(c2.distanceVers(coordonnees));
+		double delta = Math.abs(distanceC2 + distanceC1 - perimetre() - getEpaisseur());
+		return (delta < getEpaisseur() / 2.0);
 	}
 
 	@Override

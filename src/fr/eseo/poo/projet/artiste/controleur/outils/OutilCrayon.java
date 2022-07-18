@@ -11,7 +11,7 @@ import fr.eseo.poo.projet.artiste.vue.formes.VueTrace;
 
 public class OutilCrayon extends Outil {
 	
-	private static final long serialVersionUID = -3183957788529105817L;
+	private static final long serialVersionUID = 1L;
 	private List<VueTrace> vueTraces;
 
 	public OutilCrayon() {

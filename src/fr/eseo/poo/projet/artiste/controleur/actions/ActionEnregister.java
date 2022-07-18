@@ -18,10 +18,9 @@ import fr.eseo.poo.projet.artiste.xml.EnregistreurSVG;
 
 public class ActionEnregister extends AbstractAction {
 
-	private static final long serialVersionUID = 4753265740890908987L;
+	private static final long serialVersionUID = 1L;
 	public static final String NOM_ACTION = "Enregistrer";
 	private PanneauDessin panneauDessin;	
-	public static final String ENTREE_TEXTE_NOM = "Nom du fichier";
 	private JFrame fenetre;
 	private JTextField textefield;
 
@@ -36,10 +35,10 @@ public class ActionEnregister extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		fenetre = new JFrame("Enregistrer fichier");
 		JPanel panneauTexte = new JPanel();
-		JLabel labelTexte = new JLabel(ENTREE_TEXTE_NOM);
+		JLabel labelTexte = new JLabel("Nom du fichier");
 		textefield = new JTextField();
 		textefield.setPreferredSize(new Dimension(200, 30));
-		textefield.setName(ENTREE_TEXTE_NOM);
+		textefield.setName("Nom du fichier");
 		JLabel extension = new JLabel(".svg");
 		labelTexte.setLabelFor(textefield);
 		

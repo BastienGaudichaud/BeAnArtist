@@ -17,10 +17,9 @@ import fr.eseo.poo.projet.artiste.xml.LecteurSVG;
 
 public class ActionOuvrir extends AbstractAction {
 
-	private static final long serialVersionUID = 4753265740890908987L;
+	private static final long serialVersionUID = 1L;
 	public static final String NOM_ACTION = "Ouvrir";
 	private PanneauDessin panneauDessin;	
-	public static final String ENTREE_TEXTE_NOM = "Nom du fichier";
 	private JFrame fenetre;
 	private JFileChooser selecteur;
 	private JFrame fenetre2;
@@ -54,6 +53,7 @@ public class ActionOuvrir extends AbstractAction {
 		LecteurSVG lecteur = new LecteurSVG();
 		List<VueForme> dessin;
 		try {
+			panneauDessin.setCouleurFondCourante(lecteur.getFond(fichier));
 			dessin = lecteur.lisDessin(fichier);
 			panneauDessin.getVueFormes().clear();
 			for (VueForme vueForme : dessin) {

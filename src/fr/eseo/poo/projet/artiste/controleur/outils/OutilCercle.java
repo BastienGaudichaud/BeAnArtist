@@ -8,9 +8,9 @@ import fr.eseo.poo.projet.artiste.vue.formes.VueForme;
 
 public class OutilCercle extends OutilForme {
 
-	private static final long serialVersionUID = 2339878176501138917L;
+	private static final long serialVersionUID = 1L;
 
-	/** Create a circle according to the action of the user drawing.
+	/* Create a circle according to the action of the user drawing.
 	 * (See the documentation in the Application for more details.)
 	 * (Called by OutilForme.)*/
 	@Override

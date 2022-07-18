@@ -9,7 +9,7 @@ import fr.eseo.poo.projet.artiste.vue.formes.VueRectangle;
 
 public class OutilRectangle extends OutilForme {
 
-	private static final long serialVersionUID = 3136482689441987068L;
+	private static final long serialVersionUID = 1L;
 
 	/* Create a rectangle according to the action of the user drawing.
 	 * (See the documentation in the Application for more details.)

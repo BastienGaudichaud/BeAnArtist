@@ -1,5 +1,6 @@
 package fr.eseo.poo.projet.artiste.controleur.actions;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -9,8 +10,8 @@ import fr.eseo.poo.projet.artiste.vue.ihm.PanneauDessin;
 
 public class ActionAgrandirRetrecir extends AbstractAction {
 
+	private static final long serialVersionUID = 1L;
 	public static final String NOM_ACTION = "Agrandir/Rétrécir";
-	private static final long serialVersionUID = 4753265740890908987L;
 	private PanneauDessin panneauDessin;
 
 	public ActionAgrandirRetrecir(PanneauDessin panneauDessin) {
@@ -24,10 +25,10 @@ public class ActionAgrandirRetrecir extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		JFrame fenetre = this.panneauDessin.getParent();
 		int state = fenetre.getExtendedState();
-		if (state == JFrame.MAXIMIZED_BOTH) {
-			fenetre.setExtendedState(JFrame.NORMAL);
+		if (state == Frame.MAXIMIZED_BOTH) {
+			fenetre.setExtendedState(Frame.NORMAL);
 		} else {
-			fenetre.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			fenetre.setExtendedState(Frame.MAXIMIZED_BOTH);
 		}
 	}
 

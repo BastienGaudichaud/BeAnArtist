@@ -1,26 +1,31 @@
 package fr.eseo.poo.projet.artiste.modele.formes;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.Locale;
 
 import fr.eseo.poo.projet.artiste.modele.Coloriable;
 import fr.eseo.poo.projet.artiste.modele.Coordonnees;
 
-public abstract class Forme implements Coloriable {
+public abstract class Forme implements Coloriable, Serializable {
 
+	private static final long serialVersionUID = 1L;
 	public static final Coordonnees COORDONNEES_PAR_DEFAUT = new Coordonnees();
 	public static final double LARGEUR_PAR_DEFAUT = 100;
 	public static final double HAUTEUR_PAR_DEFAUT = 150;
 	public static final Color COULEUR_PAR_DEFAUT = javax.swing.UIManager.getColor("Panel.foreground");
-	private static final int EPAISSEUR_PAR_DEFAUT = 4;
+	public static final int EPAISSEUR_PAR_DEFAUT = 4;
+	public static final int ANGLE_PAR_DEFAUT = 0;
 	private Coordonnees position;
 	private double largeur;
 	private double hauteur;
 	private Color couleurContour;
 	private Color couleurRemplissage;
 	private int epaisseur;
-
+	private int angle;
+	protected int tailleMin = -2000;
+	protected int tailleMax = 2000;
 
 
 	protected Forme() {
@@ -36,12 +41,12 @@ public abstract class Forme implements Coloriable {
 	}
 
 	protected Forme(Coordonnees position, double largeur, double hauteur) {
-		this.position = position;
-		this.largeur = largeur;
-		this.hauteur = hauteur;
-		this.couleurContour = COULEUR_PAR_DEFAUT;
-		this.couleurRemplissage = COULEUR_PAR_DEFAUT;
-		this.epaisseur = EPAISSEUR_PAR_DEFAUT;
+		setPosition(position);
+		setLargeur(largeur);
+		setHauteur(hauteur);
+		setCouleurContour(COULEUR_PAR_DEFAUT);
+		setCouleurRemplissage(COULEUR_PAR_DEFAUT);
+		setEpaisseur(EPAISSEUR_PAR_DEFAUT);
 	}
 
 	public Coordonnees getPosition() {
@@ -113,16 +118,44 @@ public abstract class Forme implements Coloriable {
 		}
 	}
 
+	public int getAngle() {
+		return angle;
+	}
+
+	public int getTailleMin() {
+		return tailleMin;
+	}
+
+	public int getTailleMax() {
+		return tailleMax;
+	}
+
 	public void setPosition(Coordonnees position) {
 		this.position = position;
 	}
 
 	public void setLargeur(double largeur) {
-		this.largeur = largeur;
+		if(largeur > tailleMin) {
+			if(largeur < tailleMax) {
+				this.largeur = largeur;
+			} else {
+				this.largeur = tailleMax;
+			}
+		} else {
+			this.largeur = tailleMin;
+		}
 	}
 
 	public void setHauteur(double hauteur) {
-		this.hauteur = hauteur;
+		if(hauteur > tailleMin) {
+			if(hauteur < tailleMax) {
+				this.hauteur = hauteur;
+			} else {
+				this.hauteur = tailleMax;
+			}
+		} else {
+			this.hauteur = tailleMin;
+		}
 	}
 
 	@Override
@@ -136,6 +169,10 @@ public abstract class Forme implements Coloriable {
 
 	public void setEpaisseur(int epaisseur) {
 		this.epaisseur = epaisseur;
+	}
+
+	public void setAngle(int angle) {
+		this.angle = angle % 360;
 	}
 
 	public void deplacerDe(double deltaX, double deltaY) {

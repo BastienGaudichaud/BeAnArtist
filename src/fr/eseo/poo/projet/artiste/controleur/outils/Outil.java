@@ -10,7 +10,7 @@ import fr.eseo.poo.projet.artiste.vue.ihm.PanneauDessin;
 
 public abstract class Outil implements MouseInputListener, Serializable {
 
-	private static final long serialVersionUID = 7285396746194472942L;
+	private static final long serialVersionUID = 1L;
 	private Coordonnees debut;
 	private Coordonnees fin;
 	private PanneauDessin panneauDessin;

@@ -13,11 +13,11 @@ import javax.swing.WindowConstants;
 
 public class ActionAfficheInfosDessin extends AbstractAction {
 
+	private static final long serialVersionUID = 1L;
+	public static final String NOM_ACTION = "Infos";
 	private static final String U = "<u>";
 	private static final String U2 = "</u>";
 	private static final String BR = "<br>";
-	public static final String NOM_ACTION = "Infos";
-	private static final long serialVersionUID = 4753265740890908987L;
 	private JFrame fenetre = new JFrame("Informations dessin");
 
 	public ActionAfficheInfosDessin() {

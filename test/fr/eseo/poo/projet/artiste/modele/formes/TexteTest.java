@@ -9,6 +9,7 @@ import org.junit.Test;
 import fr.eseo.poo.projet.artiste.modele.Coordonnees;
 
 public class TexteTest {
+	private static final String TEXTE = "texte";
 	private static final String ERREUR_POSITION = "Erreur position";
 	private static final String ERREUR_HAUTEUR = "Erreur hauteur";
 	private static final String ERREUR_LARGEUR = "Erreur Largeur";
@@ -29,12 +30,12 @@ public class TexteTest {
 
 	@Test
 	public void constructeurPleinTest() {
-		Texte texte = new Texte(new Coordonnees(5, 5), "texte");
+		Texte texte = new Texte(new Coordonnees(5, 5), TEXTE);
 		
 		assertEquals(ERREUR_LARGEUR, 75, texte.getLargeur(), EPSILON);
 		assertEquals(ERREUR_HAUTEUR, 24, texte.getHauteur(), EPSILON);
 		assertEquals(ERREUR_POSITION, new Coordonnees(5, 5), texte.getPosition());
-		assertEquals(ERREUR_TEXTE, "texte", texte.getTexte());
+		assertEquals(ERREUR_TEXTE, TEXTE, texte.getTexte());
 	}
 
 	@Test
@@ -57,7 +58,7 @@ public class TexteTest {
 	@Test
 	public void toStringTest() {
 		Locale.setDefault(Locale.FRENCH);
-		Texte texte = new Texte(new Coordonnees(0, 0), "texte");
+		Texte texte = new Texte(new Coordonnees(0, 0), TEXTE);
 		String line = System.lineSeparator();
 		assertEquals("Erreur toString Français",
 				"[Texte] " + line

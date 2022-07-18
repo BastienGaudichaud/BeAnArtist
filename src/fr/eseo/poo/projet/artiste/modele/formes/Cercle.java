@@ -4,6 +4,7 @@ import fr.eseo.poo.projet.artiste.modele.Coordonnees;
 
 public class Cercle extends Ellipse {
 
+	private static final long serialVersionUID = 1L;
 	public Cercle() {
 		super(LARGEUR_PAR_DEFAUT, LARGEUR_PAR_DEFAUT);
 	}

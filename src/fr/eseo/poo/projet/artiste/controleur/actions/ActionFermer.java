@@ -10,8 +10,8 @@ import fr.eseo.poo.projet.artiste.vue.ihm.PanneauDessin;
 
 public class ActionFermer extends AbstractAction {
 
+	private static final long serialVersionUID = 1L;
 	public static final String NOM_ACTION = "Fermer";
-	private static final long serialVersionUID = 4753265740890908987L;
 	private PanneauDessin panneauDessin;
 
 	public ActionFermer(PanneauDessin panneauDessin) {

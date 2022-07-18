@@ -5,45 +5,40 @@ import fr.eseo.poo.projet.artiste.modele.Remplissable;
 
 public class Ellipse extends Forme implements Remplissable {
 
+	private static final long serialVersionUID = 1L;
 	private boolean estRempli;
 
 	public Ellipse() {
 		super();
+		tailleMin = 1;
+		tailleMax = 2000;
 	}
 
 	public Ellipse(Coordonnees position) {
 		super(position);
+		tailleMin = 1;
+		tailleMax = 2000;
 	}
 
 	public Ellipse(double largeur, double hauteur) {
 		super(largeur, hauteur);
+		tailleMin = 1;
+		tailleMax = 2000;
+		setLargeur(largeur);
+		setHauteur(hauteur);
 	}
 
 	public Ellipse(Coordonnees position, double largeur, double hauteur) {
 		super(position, largeur, hauteur);
+		tailleMin = 1;
+		tailleMax = 2000;
+		setLargeur(largeur);
+		setHauteur(hauteur);
 	}
 
 	@Override
 	public boolean estRempli() {
 		return this.estRempli;
-	}
-
-	@Override
-	public void setLargeur(double largeur) {
-		if (largeur < 0) {
-			throw new IllegalArgumentException("Largeur négative !");
-		} else {
-			super.setLargeur(largeur);
-		}
-	}
-
-	@Override
-	public void setHauteur(double hauteur) {
-		if (hauteur < 0) {
-			throw new IllegalArgumentException("Hauteur négatie !");
-		} else {
-			super.setHauteur(hauteur);
-		}
 	}
 
 	@Override
@@ -66,10 +61,10 @@ public class Ellipse extends Forme implements Remplissable {
 
 	@Override
 	public boolean contient(Coordonnees coordonnees) {
-		double xA = getCadreMinX();
-		double yA = getCadreMinY();
-		double xB = getCadreMaxX();
-		double yB = getCadreMaxY();
+		double xA = getCadreMinX() - getEpaisseur() / 2.0;
+		double yA = getCadreMinY() - getEpaisseur() / 2.0;
+		double xB = getCadreMaxX()+ getEpaisseur() / 2.0;
+		double yB = getCadreMaxY()+ getEpaisseur() / 2.0;
 		double abscisse = coordonnees.getAbscisse();
 		double ordonnee = coordonnees.getOrdonnee();
 		double a = (xA + xB) / 2;

@@ -19,9 +19,7 @@ import fr.eseo.poo.projet.artiste.vue.formes.VueForme;
 
 public class OutilEtoile extends OutilForme {
 
-	private static final long serialVersionUID = -3539997145793789720L;
-	public static final String BRANCHE_SPINNER_NOM = "Nombre de branches des Etoiles";
-	public static final String LONGUEUR_SPINNER_NOM = "Longueur de branche des Etoiles";
+	private static final long serialVersionUID = 1L;
 	private JFrame fenetre = new JFrame("Option étoile");
 	private JSpinner spinnerNombreBranches;
 	private JSpinner spinnerLongueurBranche;
@@ -32,17 +30,17 @@ public class OutilEtoile extends OutilForme {
 		fenetre.setAlwaysOnTop(true);
 		JPanel panneauEtoile = new JPanel();
 		panneauEtoile.setLayout(new BoxLayout(panneauEtoile, BoxLayout.Y_AXIS));
-		JLabel labelNombreBranche = new JLabel(BRANCHE_SPINNER_NOM);
+		JLabel labelNombreBranche = new JLabel("Nombre de branches des Etoiles");
 		spinnerNombreBranches = new JSpinner(new SpinnerNumberModel(Etoile.NOMBRE_BRANCHES_PAR_DEFAUT, 3, 15, 1));
 		spinnerNombreBranches.setMaximumSize(new Dimension(45, 30));
-		spinnerNombreBranches.setName(BRANCHE_SPINNER_NOM);
+		spinnerNombreBranches.setName("Nombre de branches des Etoiles");
 		spinnerNombreBranches.setAlignmentX(-20);
 		labelNombreBranche.setLabelFor(spinnerNombreBranches);
-		JLabel labelLongueurBranche = new JLabel(LONGUEUR_SPINNER_NOM);
+		JLabel labelLongueurBranche = new JLabel("Longueur de branche des Etoiles");
 		this.spinnerLongueurBranche = new JSpinner(
 				new SpinnerNumberModel(Etoile.LONGUEUR_BRANCHE_PAR_DEFAUT, 0, 1, 0.01));
 		spinnerLongueurBranche.setMaximumSize(new Dimension(45, 30));
-		spinnerLongueurBranche.setName(LONGUEUR_SPINNER_NOM);
+		spinnerLongueurBranche.setName("Longueur de branche des Etoiles");
 		spinnerLongueurBranche.setAlignmentX(-20);
 		labelLongueurBranche.setLabelFor(spinnerLongueurBranche);
 		panneauEtoile.add(labelNombreBranche);

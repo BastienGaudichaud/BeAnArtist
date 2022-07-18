@@ -1,6 +1,7 @@
 package fr.eseo.poo.projet.artiste;
 
 import java.awt.BorderLayout;
+import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -25,7 +26,7 @@ public class EtreUnArtiste {
 		infos.actionPerformed(null);
 		fenetre.pack();
 		fenetre.setLocationRelativeTo(null);
-		fenetre.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		fenetre.setExtendedState(Frame.MAXIMIZED_BOTH);
 		fenetre.setVisible(true);
 	}
 

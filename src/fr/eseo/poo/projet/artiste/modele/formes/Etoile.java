@@ -9,6 +9,7 @@ import fr.eseo.poo.projet.artiste.modele.Remplissable;
 
 public class Etoile extends Forme implements Remplissable {
 
+	private static final long serialVersionUID = 1L;
 	public static final int NOMBRE_BRANCHES_PAR_DEFAUT = 5;
 	public static final double LONGUEUR_BRANCHE_PAR_DEFAUT = 0.5;
 	public static final double ANGLE_PREMIERE_BRANCHE_PAR_DEFAUT = 0;
@@ -24,6 +25,8 @@ public class Etoile extends Forme implements Remplissable {
 	}
 
 	public Etoile(Coordonnees position, double taille, int nombreBranches, double anglePremiereBranche, double longueurBranche) {
+		tailleMin = 1;
+		tailleMax = 2000;
 		setPosition(position);
 		setLargeur(taille);
 		setNombreBranches(nombreBranches);
@@ -84,22 +87,38 @@ public class Etoile extends Forme implements Remplissable {
 
 	@Override
 	public void setHauteur(double hauteur) {
-		if (hauteur < 0) {
-			throw new IllegalArgumentException("Largeur négative !");
+		if(hauteur > tailleMin) {
+			if(hauteur < tailleMax) {
+				super.setLargeur(hauteur);
+				super.setHauteur(hauteur);
+				this.setPosition(getPosition());
+			} else {
+				super.setLargeur(tailleMax);
+				super.setHauteur(tailleMax);
+				this.setPosition(getPosition());
+			}
 		} else {
-			super.setLargeur(hauteur);
-			super.setHauteur(hauteur);
+			super.setLargeur(tailleMin);
+			super.setHauteur(tailleMin);
 			this.setPosition(getPosition());
 		}
 	}
 
 	@Override
 	public void setLargeur(double largeur) {
-		if (largeur < 0) {
-			throw new IllegalArgumentException("Largeur négative !");
+		if(largeur > tailleMin) {
+			if(largeur < tailleMax) {
+				super.setLargeur(largeur);
+				super.setHauteur(largeur);
+				this.setPosition(getPosition());
+			} else {
+				super.setLargeur(tailleMax);
+				super.setHauteur(tailleMax);
+				this.setPosition(getPosition());
+			}
 		} else {
-			super.setLargeur(largeur);
-			super.setHauteur(largeur);
+			super.setLargeur(tailleMin);
+			super.setHauteur(tailleMin);
 			this.setPosition(getPosition());
 		}
 	}

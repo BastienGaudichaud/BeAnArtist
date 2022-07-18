@@ -10,8 +10,8 @@ import fr.eseo.poo.projet.artiste.vue.ihm.PanneauDessin;
 
 public class ActionModifier extends AbstractAction {
 
+	private static final long serialVersionUID = 1L;
 	public static final String NOM_ACTION = "Modifier forme";
-	private static final long serialVersionUID = 1822369817001196604L;
 	private PanneauDessin panneauDessin;
 	private PanneauBarreOutils parent;
 

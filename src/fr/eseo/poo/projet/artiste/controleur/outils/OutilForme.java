@@ -7,7 +7,7 @@ import fr.eseo.poo.projet.artiste.vue.formes.VueForme;
 
 public abstract class OutilForme extends Outil {
 
-	private static final long serialVersionUID = -6022941729508918680L;
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void mouseClicked(MouseEvent event) {

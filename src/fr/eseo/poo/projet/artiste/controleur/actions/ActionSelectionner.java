@@ -10,8 +10,8 @@ import fr.eseo.poo.projet.artiste.vue.ihm.PanneauDessin;
 
 public class ActionSelectionner extends AbstractAction {
 
+	private static final long serialVersionUID = 1L;
 	public static final String NOM_ACTION = "Informations/Déplacer";
-	private static final long serialVersionUID = 3400711143656493848L;
 	private PanneauDessin panneauDessin;
 	private PanneauBarreOutils parent;
 

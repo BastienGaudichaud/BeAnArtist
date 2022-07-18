@@ -13,6 +13,7 @@ import fr.eseo.poo.projet.artiste.modele.Coordonnees;
 
 public class LigneTest {
 
+	private static final String LIGNE = "[Ligne] \r\n";
 	private static final String ERREUR_POSITION = "Erreur position";
 	private static final String ERREUR_HAUTEUR = "Erreur hauteur";
 	private static final String ERREUR_LARGEUR = "Erreur largeur";
@@ -193,7 +194,7 @@ public class LigneTest {
 		Locale.setDefault(Locale.FRENCH);
 		Ligne ligne27 = new Ligne(new Coordonnees(0, 0), 5, 5);
 		assertEquals("Erreur toString()",
-				"[Ligne] \r\n"
+				LIGNE
 				+ "c1 : (0,0 , 0,0)\r\n"
 				+ "c2 : (5,0 , 5,0)\r\n"
 				+ "longueur : 7,07\r\n"
@@ -202,7 +203,7 @@ public class LigneTest {
 				ligne27.toString());
 		Ligne ligne28 = new Ligne(new Coordonnees(0, 0), -5, -5);
 		assertEquals("Erreur toString()",
-				"[Ligne] \r\n"
+				LIGNE
 				+ "c1 : (0,0 , 0,0)\r\n"
 				+ "c2 : (-5,0 , -5,0)\r\n"
 				+ "longueur : 7,07\r\n"
@@ -211,7 +212,7 @@ public class LigneTest {
 				ligne28.toString());
 		Locale.setDefault(Locale.ENGLISH);
 		assertEquals("Erreur toString Anglais",
-				"[Ligne] \r\n"
+				LIGNE
 				+ "c1 : (0.0 , 0.0)\r\n"
 				+ "c2 : (-5.0 , -5.0)\r\n"
 				+ "length : 7.07\r\n"

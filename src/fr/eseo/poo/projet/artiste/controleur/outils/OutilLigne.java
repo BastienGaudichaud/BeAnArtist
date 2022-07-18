@@ -9,7 +9,7 @@ import fr.eseo.poo.projet.artiste.vue.formes.VueLigne;
 
 public class OutilLigne extends OutilForme {
 
-	private static final long serialVersionUID = -590791103595024602L;
+	private static final long serialVersionUID = 1L;
 
 	/* Create a line according to the action of the user drawing.
 	 * (See the documentation in the Application for more details.)

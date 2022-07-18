@@ -19,8 +19,7 @@ import fr.eseo.poo.projet.artiste.vue.formes.VuePolygoneRegulier;
 
 public class OutilPolygoneRegulier extends OutilForme {
 	
-	private static final long serialVersionUID = 697503588167520858L;
-	public static final String COTE_SPINNER_NOM = "Nombre de cotés des Polygones";
+	private static final long serialVersionUID = 1L;
 	private JFrame fenetre = new JFrame("Option polygone");
 	private JSpinner spinnerNombreCotes;
 
@@ -30,12 +29,12 @@ public class OutilPolygoneRegulier extends OutilForme {
 		fenetre.setAlwaysOnTop(true);
 		JPanel panneauPolygone = new JPanel();
 		panneauPolygone.setLayout(new BoxLayout(panneauPolygone, BoxLayout.Y_AXIS));
-		JLabel labelNombreCotes = new JLabel(COTE_SPINNER_NOM);
+		JLabel labelNombreCotes = new JLabel("Nombre de cotés des Polygones");
 		spinnerNombreCotes = new JSpinner(
 				new SpinnerNumberModel(PolygoneRegulier.NOMBRE_DE_COTES_PAR_DEFAUT, 3, 15, 1));
 		spinnerNombreCotes.setMaximumSize(new Dimension(45, 30));
 		spinnerNombreCotes.setAlignmentX(-20);
-		spinnerNombreCotes.setName(COTE_SPINNER_NOM);
+		spinnerNombreCotes.setName("Nombre de cotés des Polygones");
 		labelNombreCotes.setLabelFor(spinnerNombreCotes);
 		panneauPolygone.add(labelNombreCotes);
 		panneauPolygone.add(spinnerNombreCotes);

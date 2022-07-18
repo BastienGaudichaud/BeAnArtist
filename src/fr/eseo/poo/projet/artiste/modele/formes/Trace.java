@@ -8,6 +8,7 @@ import fr.eseo.poo.projet.artiste.modele.Coordonnees;
 
 public class Trace extends Forme {
 
+	private static final long serialVersionUID = 1L;
 	public static final double EPSILON = 0.1;
 	private ArrayList<Coordonnees> points;
 
@@ -15,6 +16,8 @@ public class Trace extends Forme {
 		this.points = new ArrayList<>();
 		this.points.add(position);
 		this.setPosition(position);
+		tailleMin = -2000;
+		tailleMax = 2000;
 	}
 
 	public List<Coordonnees> getPoints() {
@@ -58,7 +61,7 @@ public class Trace extends Forme {
 			double distanceC2 = Math.abs(getPoints().get(i + 1).distanceVers(coordonnees));
 			double distanceC1C2 = Math.abs(getPoints().get(i).distanceVers(getPoints().get(i + 1)));
 			double delta = Math.abs(distanceC2 + distanceC1 - distanceC1C2);
-			if (delta < EPSILON) {
+			if (delta < (getEpaisseur() / 2.0)) {
 				result = true;
 			}
 		}

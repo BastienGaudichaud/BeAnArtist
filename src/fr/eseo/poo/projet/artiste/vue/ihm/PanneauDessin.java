@@ -17,11 +17,10 @@ import fr.eseo.poo.projet.artiste.vue.formes.VueForme;
 /* The main frame of the application. */
 public class PanneauDessin extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	public static final int LARGEUR_PAR_DEFAUT = 500;
 	public static final int HAUTEUR_PAR_DEFAUT = 300;
 	public static final Color COULEUR_FOND_PAR_DEFAUT = Color.white;
-	public static final int EPAISSEUR_PAR_DEFAUT = 4;
-	private static final long serialVersionUID = -3285852267608814588L;
 	private final List<VueForme> vueFormes = new ArrayList<>();
 	private Color couleurContourCourante;
 	private Color couleurRemplissageCourante;
@@ -29,7 +28,7 @@ public class PanneauDessin extends JPanel {
 	private boolean modeRemplissage;
 	private int epaisseurCourante;
 	private Outil outilCourant;
-	private JFrame parent;
+	private JFrame fenetre;
 
 	public PanneauDessin(JFrame parent) {
 		this.setPreferredSize(new Dimension(LARGEUR_PAR_DEFAUT, HAUTEUR_PAR_DEFAUT));
@@ -37,8 +36,8 @@ public class PanneauDessin extends JPanel {
 		this.setCouleurFondCourante(COULEUR_FOND_PAR_DEFAUT);
 		this.setCouleurContourCourante(Forme.COULEUR_PAR_DEFAUT);
 		this.setModeRemplissage(false);
-		this.setEpaisseurCourante(EPAISSEUR_PAR_DEFAUT);
-		this.parent = parent;
+		this.setEpaisseurCourante(Forme.EPAISSEUR_PAR_DEFAUT);
+		this.fenetre = parent;
 	}
 
 	public PanneauDessin(int largeur, int hauteur, Color fond) {
@@ -47,7 +46,7 @@ public class PanneauDessin extends JPanel {
 		this.setCouleurFondCourante(COULEUR_FOND_PAR_DEFAUT);
 		this.setCouleurContourCourante(Forme.COULEUR_PAR_DEFAUT);
 		this.setModeRemplissage(false);
-		this.setEpaisseurCourante(EPAISSEUR_PAR_DEFAUT);
+		this.setEpaisseurCourante(Forme.EPAISSEUR_PAR_DEFAUT);
 
 	}
 
@@ -81,7 +80,7 @@ public class PanneauDessin extends JPanel {
 
 	@Override
 	public JFrame getParent() {
-		return parent;
+		return fenetre;
 	}
 
 	public void setCouleurContourCourante(Color couleur) {

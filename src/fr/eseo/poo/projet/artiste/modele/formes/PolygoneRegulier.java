@@ -9,6 +9,7 @@ import fr.eseo.poo.projet.artiste.modele.Remplissable;
 
 public class PolygoneRegulier extends Forme implements Remplissable {
 
+	private static final long serialVersionUID = 1L;
 	public static final int NOMBRE_DE_COTES_PAR_DEFAUT = 3;
 	public static final double ANGLE_SOMMET_PAR_DEFAUT = -(3 * Math.PI / 4);
 	private int nombreDeCotes;
@@ -21,7 +22,10 @@ public class PolygoneRegulier extends Forme implements Remplissable {
 	}
 	
 	public PolygoneRegulier(Coordonnees position, double taille, int nombreDeCotes, double anglePremierSommet) {
-		super(position, taille, taille);
+		tailleMin = 1;
+		tailleMax = 2000;
+		setPosition(position);
+		setLargeur(taille);
 		setNombreDeCotes(nombreDeCotes);
 		setAnglePremierSommet(anglePremierSommet);
 	}
@@ -77,23 +81,39 @@ public class PolygoneRegulier extends Forme implements Remplissable {
 	}
 
 	@Override
-	public void setLargeur(double largeur) {
-		if (largeur < 0) {
-			throw new IllegalArgumentException("Largeur négative !");
+	public void setHauteur(double hauteur) {
+		if(hauteur > tailleMin) {
+			if(hauteur < tailleMax) {
+				super.setLargeur(hauteur);
+				super.setHauteur(hauteur);
+				this.setPosition(getPosition());
+			} else {
+				super.setLargeur(tailleMax);
+				super.setHauteur(tailleMax);
+				this.setPosition(getPosition());
+			}
 		} else {
-			super.setLargeur(largeur);
-			super.setHauteur(largeur);
+			super.setLargeur(tailleMin);
+			super.setHauteur(tailleMin);
 			this.setPosition(getPosition());
 		}
 	}
 
 	@Override
-	public void setHauteur(double hauteur) {
-		if (hauteur < 0) {
-			throw new IllegalArgumentException("Largeur négative !");
+	public void setLargeur(double largeur) {
+		if(largeur > tailleMin) {
+			if(largeur < tailleMax) {
+				super.setLargeur(largeur);
+				super.setHauteur(largeur);
+				this.setPosition(getPosition());
+			} else {
+				super.setLargeur(tailleMax);
+				super.setHauteur(tailleMax);
+				this.setPosition(getPosition());
+			}
 		} else {
-			super.setLargeur(hauteur);
-			super.setHauteur(hauteur);
+			super.setLargeur(tailleMin);
+			super.setHauteur(tailleMin);
 			this.setPosition(getPosition());
 		}
 	}

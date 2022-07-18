@@ -9,7 +9,7 @@ import fr.eseo.poo.projet.artiste.vue.formes.VueForme;
 
 public class OutilEllipse extends OutilForme {
 
-	private static final long serialVersionUID = 5674622951624298778L;
+	private static final long serialVersionUID = 1L;
 
 	/* Create an ellipse according to the action of the user drawing.
 	 * (See the documentation in the Application for more details.)

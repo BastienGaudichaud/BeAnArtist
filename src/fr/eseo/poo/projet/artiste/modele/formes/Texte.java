@@ -6,9 +6,10 @@ import fr.eseo.poo.projet.artiste.modele.Coordonnees;
 
 public class Texte extends Rectangle {
 
+	private static final long serialVersionUID = 1L;
 	private String contenu;
 	private Font police;
-	private int tailePolice = 24;
+	private int taillePolice = 24;
 
 	public Texte() {
 		this(COORDONNEES_PAR_DEFAUT, "");
@@ -17,8 +18,8 @@ public class Texte extends Rectangle {
 	public Texte(Coordonnees position, String texte) {
 		super(position);
 		this.setTexte(texte);
-		this.setLargeur((double) texte.length() * 15 * tailePolice / 24);
-		this.setHauteur(tailePolice);
+		this.setLargeur((double) texte.length() * 15 * taillePolice / 24);
+		this.setHauteur(taillePolice);
 	}
 
 	@Override
@@ -30,8 +31,8 @@ public class Texte extends Rectangle {
 		return police;
 	}
 
-	public int getTailePolice() {
-		return tailePolice;
+	public int getTaillePolice() {
+		return taillePolice;
 	}
 
 	public void setTexte(String texte) {
@@ -41,11 +42,17 @@ public class Texte extends Rectangle {
 	public void setPolice(int taillePolice) {
 		String texte = getTexte();
 		String[] textes = texte.split("\\R");
+		int longueur = 0;
+		for (String string : textes) {
+			if(string.length() > longueur) {
+				longueur = string.length();
+			}
+		}
 		int nbLignes = textes.length;
 		this.police = new Font("Police texte", Font.BOLD, taillePolice);
-		this.tailePolice = taillePolice;
-		this.setLargeur((double) contenu.length() * 15 * tailePolice / 24);
-		this.setHauteur(taillePolice * nbLignes);
+		this.taillePolice = taillePolice;
+		this.setLargeur((double) longueur * 15 * taillePolice / 24);
+		this.setHauteur((double)taillePolice * nbLignes);
 	}
 
 	@Override

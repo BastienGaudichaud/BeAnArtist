@@ -23,7 +23,7 @@ import fr.eseo.poo.projet.artiste.controleur.actions.ActionSelectionner;
 
 public class PanneauBarreOutils extends JPanel {
 
-	private static final long serialVersionUID = 7757224560256486258L;
+	private static final long serialVersionUID = 1L;
 	private PanneauDessin panneauDessin;
 	private ActionDessiner dessin;
 	private ButtonGroup boutons;

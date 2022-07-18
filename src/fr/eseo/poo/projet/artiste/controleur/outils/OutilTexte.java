@@ -21,7 +21,7 @@ import fr.eseo.poo.projet.artiste.vue.formes.VueTexte;
 
 public class OutilTexte extends OutilForme {
 
-	private static final long serialVersionUID = -2239888908007504017L;
+	private static final long serialVersionUID = 1L;
 	public static final String ENTREE_TEXTE_NOM = "Texte à ajouter";
 	public static final String TAILLE_TEXTE_NOM = "Taille de Police";
 	private JFrame fenetre = new JFrame("Option texte");
@@ -42,7 +42,7 @@ public class OutilTexte extends OutilForme {
 		textefield.getDocument().addDocumentListener(listener);
 		labelTexte.setLabelFor(textefield);
 		JLabel labelTailleTexte = new JLabel(TAILLE_TEXTE_NOM);
-		spinnerTaille = new JSpinner(new SpinnerNumberModel(24, 12, 48, 1));
+		spinnerTaille = new JSpinner(new SpinnerNumberModel(24, 12, 180, 1));
 		spinnerTaille.setMaximumSize(new Dimension(45, 30));
 		spinnerTaille.setName(TAILLE_TEXTE_NOM);
 		spinnerTaille.setAlignmentX(-20);
