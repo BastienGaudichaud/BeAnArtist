@@ -41,7 +41,8 @@ public class ActionAfficheInfosDessin extends AbstractAction {
 				+ U + NOM_ACTION + U2 + " : Ouvre cette page d’information." + BR 
 				+ BR
 				+ U + "Texte" + U2 + " : Permet de saisir un texte dans une fenêtre et de le " + BR
-				+ "positionner sur le dessin en cliquant." + BR 
+				+ "positionner sur le dessin en cliquant. Il peut mettre quelques " + BR
+				+ "secondes à apparaître." + BR 
 				+ BR
 				+ U + "Crayon" + U2 + " : Permet de dessiner en pressant le bouton gauche de " + BR 
 				+ "la souris et en la déplaçant." + BR
@@ -83,7 +84,7 @@ public class ActionAfficheInfosDessin extends AbstractAction {
 		panneauInfos.add(label);
 		fenetre.setLocation(0, 0);
 		fenetre.add(panneauInfos);
-		fenetre.setMinimumSize(new Dimension(440, 760));
+		fenetre.setMinimumSize(new Dimension(440, 780));
 		fenetre.setResizable(false);
 		fenetre.pack();
 		fenetre.setVisible(true);

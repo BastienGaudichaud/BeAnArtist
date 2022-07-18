@@ -44,6 +44,10 @@ public class OutilModifier extends Outil {
 	private static final long serialVersionUID = 1L;
 	private VueForme vueFormeSelectionnee;
 	
+	public OutilModifier() {
+		this.vueFormeSelectionnee = null;
+	}
+	
 	/* Launch the appropriate action when a button is clicked. */
 	@Override
 	public void mouseClicked(MouseEvent event) {

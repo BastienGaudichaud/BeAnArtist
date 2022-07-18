@@ -3,12 +3,19 @@ package fr.eseo.poo.projet.artiste.controleur.outils;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
@@ -20,14 +27,79 @@ import fr.eseo.poo.projet.artiste.modele.Coordonnees;
 import fr.eseo.poo.projet.artiste.modele.formes.Forme;
 import fr.eseo.poo.projet.artiste.vue.formes.VueForme;
 
-public class OutilSelectionner extends Outil {
+public class OutilSelectionner extends Outil{
 
 	private static final long serialVersionUID = 1L;
 	private VueForme vueFormeSelectionnee;
+	private JFrame infos;
+
+	public OutilSelectionner() {
+		this.vueFormeSelectionnee = null;
+	}
 	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(this.vueFormeSelectionnee != null) {
+			int character = e.getKeyCode();
+			Forme forme = vueFormeSelectionnee.getForme();
+			switch (character) {
+			case KeyEvent.VK_DOWN:
+				forme.deplacerDe(0, 1);
+				break;
+			case KeyEvent.VK_LEFT:
+				forme.deplacerDe(-1, 0);
+				break;
+			case KeyEvent.VK_UP:
+				forme.deplacerDe(0, -1);
+				break;
+			case KeyEvent.VK_RIGHT:
+				forme.deplacerDe(1, 0);
+				break;
+			case KeyEvent.VK_NUMPAD0:
+				forme.deplacerVers(0, 0);
+				break;
+			case KeyEvent.VK_NUMPAD1:
+				forme.deplacerDe(-10, 10);
+				break;
+			case KeyEvent.VK_NUMPAD2:
+				forme.deplacerDe(0, 10);
+				break;
+			case KeyEvent.VK_NUMPAD3:
+				forme.deplacerDe(10, 10);
+				break;
+			case KeyEvent.VK_NUMPAD4:
+				forme.deplacerDe(-10, 0);
+				break;
+			case KeyEvent.VK_NUMPAD5:
+				JOptionPane.showMessageDialog(getPanneauDessin(), forme, ActionSelectionner.NOM_ACTION, JOptionPane.INFORMATION_MESSAGE);
+				break;
+			case KeyEvent.VK_NUMPAD6:
+				forme.deplacerDe(10, 0);
+				break;
+			case KeyEvent.VK_NUMPAD7:
+				forme.deplacerDe(-10, -10);
+				break;
+			case KeyEvent.VK_NUMPAD8:
+				forme.deplacerDe(0, -10);
+				break;
+			case KeyEvent.VK_NUMPAD9:
+				forme.deplacerDe(10, -10);
+				break;
+			case KeyEvent.VK_ESCAPE:
+				JOptionPane.showMessageDialog(getPanneauDessin(), this.vueFormeSelectionnee.getForme(), ActionSelectionner.NOM_ACTION, JOptionPane.INFORMATION_MESSAGE);
+				this.vueFormeSelectionnee = null;
+				infos.dispose();
+			default:
+				break;
+			}
+			getPanneauDessin().repaint();
+		}
+	}
+
 	/* Launch the appropriate action when a button is clicked. */
 	@Override
 	public void mouseClicked(MouseEvent event) {
+		try {infos.dispose();} catch (Exception e) {}
 		this.setDebut(new Coordonnees(event.getX(), event.getY()));
 		if (event.getButton() == MouseEvent.BUTTON1) {
 			clicGauche(event);
@@ -69,9 +141,8 @@ public class OutilSelectionner extends Outil {
 				}
 				else{
 					this.vueFormeSelectionnee = bonneForme.get(0);
+					fenetreInfos();
 				}
-			} else {
-				this.vueFormeSelectionnee = null;
 			}
 		} else {
 			this.vueFormeSelectionnee.getForme().setPosition(getDebut());
@@ -114,6 +185,7 @@ public class OutilSelectionner extends Outil {
 			public void actionPerformed(ActionEvent e) {
 				vueFormeSelectionnee = (VueForme) selectionneur.getValue();	
 				fenetre.dispose();
+				fenetreInfos();
 			}
 		};
 		ok.addActionListener(listener);
@@ -122,5 +194,22 @@ public class OutilSelectionner extends Outil {
 	private void clicDroit() {
 		JOptionPane.showMessageDialog(getPanneauDessin(), this.vueFormeSelectionnee.getForme(), ActionSelectionner.NOM_ACTION, JOptionPane.INFORMATION_MESSAGE);
 		this.vueFormeSelectionnee = null;
+		infos.dispose();
 	}
+	
+	private void fenetreInfos() {
+		try {
+			infos = new JFrame("Informations déplacement");
+			infos.setAlwaysOnTop(true);
+			infos.setFocusable(false);
+			BufferedImage myPicture = ImageIO.read(new File("numpad.png"));
+			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			infos.add(picLabel);
+			infos.pack();
+			infos.setVisible(true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

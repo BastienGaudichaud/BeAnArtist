@@ -1,5 +1,7 @@
 package fr.eseo.poo.projet.artiste.controleur.outils;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
 
@@ -8,12 +10,12 @@ import javax.swing.event.MouseInputListener;
 import fr.eseo.poo.projet.artiste.modele.Coordonnees;
 import fr.eseo.poo.projet.artiste.vue.ihm.PanneauDessin;
 
-public abstract class Outil implements MouseInputListener, Serializable {
+public abstract class Outil implements MouseInputListener, KeyListener, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Coordonnees debut;
 	private Coordonnees fin;
-	private PanneauDessin panneauDessin;
+	protected PanneauDessin panneauDessin;
 
 	public Coordonnees getDebut() {
 		return this.debut;
@@ -73,6 +75,21 @@ public abstract class Outil implements MouseInputListener, Serializable {
 	public void mouseReleased(MouseEvent event) {
 		this.setFin(new Coordonnees(event.getX(), event.getY()));
 	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+	
+	}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+	}
+
 
 	public void destroy() {
 	}

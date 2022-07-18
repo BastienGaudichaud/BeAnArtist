@@ -45,7 +45,9 @@ public class ActionAfficheInfos extends AbstractAction {
 				+ "clic gauche, puis de la déplacer à l'aide d'un second clic gauche sur " + BR
 				+ "sa destination. Un clic droit affiche les informations de la forme et " + BR
 				+ "la désélectionne. Si on clique sur plusieurs formes superposées, une " + BR
-				+ "fenêtre apparaît pour choisir celle à sélectionner." + BR
+				+ "fenêtre apparaît pour choisir celle à sélectionner. Quand une forme " +BR
+				+ "est sélectionnée, une fenêtre présentant les actions réalisable à " +BR
+				+ "l'aide du clavier apparaît." + BR
 				+ BR
 				+ U + "Modifier forme" + U2 + " : Permet de sélectionner une forme avec un clic " + BR
 				+ "gauche. Un clic droit ensuite ouvre une fenêtre contextuelle qui permet " + BR
@@ -76,7 +78,7 @@ public class ActionAfficheInfos extends AbstractAction {
 		panneauInfos.add(label);
 		fenetre.setLocation(0, 0);
 		fenetre.add(panneauInfos);
-		fenetre.setMinimumSize(new Dimension(440, 640));
+		fenetre.setMinimumSize(new Dimension(440, 660));
 		fenetre.setResizable(false);
 		fenetre.pack();
 		fenetre.setVisible(true);

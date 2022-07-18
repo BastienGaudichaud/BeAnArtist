@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class PanneauDessin extends JPanel {
 		this.setCouleurContourCourante(Forme.COULEUR_PAR_DEFAUT);
 		this.setModeRemplissage(false);
 		this.setEpaisseurCourante(Forme.EPAISSEUR_PAR_DEFAUT);
-		this.fenetre = parent;
+		this.fenetre = parent;		
 	}
 
 	public PanneauDessin(int largeur, int hauteur, Color fond) {
@@ -46,8 +47,7 @@ public class PanneauDessin extends JPanel {
 		this.setCouleurFondCourante(COULEUR_FOND_PAR_DEFAUT);
 		this.setCouleurContourCourante(Forme.COULEUR_PAR_DEFAUT);
 		this.setModeRemplissage(false);
-		this.setEpaisseurCourante(Forme.EPAISSEUR_PAR_DEFAUT);
-
+		this.requestFocusInWindow();
 	}
 
 	public Color getCouleurContourCourante() {
@@ -117,6 +117,10 @@ public class PanneauDessin extends JPanel {
 			outil.setPanneauDessin(this);
 			this.addMouseListener(outil);
 			this.addMouseMotionListener(outil);
+			this.setFocusable(true);
+			this.addKeyListener(outil);
+			this.requestFocusInWindow();
+			
 		}
 	}
 
@@ -137,6 +141,16 @@ public class PanneauDessin extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g.create();
+		g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+		g2d.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
+		g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		g2d.setRenderingHint(RenderingHints.KEY_RESOLUTION_VARIANT, RenderingHints.VALUE_RESOLUTION_VARIANT_SIZE_FIT);
+		g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
+		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		for (int i = 0; i < vueFormes.size(); i++) {
 			vueFormes.get(i).affiche(g2d);
 		}
