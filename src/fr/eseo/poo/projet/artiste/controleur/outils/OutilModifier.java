@@ -42,7 +42,6 @@ import fr.eseo.poo.projet.artiste.vue.formes.VueRectangle;
 public class OutilModifier extends Outil {
 
 	private static final long serialVersionUID = 1L;
-	private VueForme vueFormeSelectionnee;
 	
 	public OutilModifier() {
 		this.vueFormeSelectionnee = null;

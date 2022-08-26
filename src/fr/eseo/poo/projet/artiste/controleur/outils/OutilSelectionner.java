@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,6 @@ import fr.eseo.poo.projet.artiste.vue.formes.VueForme;
 public class OutilSelectionner extends Outil{
 
 	private static final long serialVersionUID = 1L;
-	private VueForme vueFormeSelectionnee;
 	private JFrame infos;
 
 	public OutilSelectionner() {
@@ -202,11 +200,9 @@ public class OutilSelectionner extends Outil{
 			infos = new JFrame("Informations déplacement");
 			infos.setAlwaysOnTop(true);
 			infos.setFocusable(false);
-			BufferedImage myPicture = ImageIO.read(new File("numpad.png"));
+			BufferedImage myPicture = ImageIO.read(getClass().getResourceAsStream("/fr/eseo/poo/projet/artiste/numpad.png"));
 			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-			infos.add(picLabel);
-			infos.pack();
-			infos.setVisible(true);
+			JOptionPane.showMessageDialog(infos, picLabel, "Commandes au clavier", JOptionPane.PLAIN_MESSAGE, null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

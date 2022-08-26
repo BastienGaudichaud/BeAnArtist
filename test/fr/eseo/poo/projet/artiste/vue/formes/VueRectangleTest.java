@@ -22,7 +22,7 @@ public class VueRectangleTest {
 		Rectangle rectangle3 = new Rectangle(new Coordonnees(389, 127), 555, 54);
 		rectangle3.setCouleurContour(Color.BLUE);
 		rectangle3.setRempli(true);
-		Rectangle rectangle4 = new Rectangle(new Coordonnees(150, 150), 200, 432);
+		Rectangle rectangle4 = new Rectangle(new Coordonnees(150, 150), 200, 200);
 		rectangle4.setRempli(true);
 		VueRectangle vueRectangle = new VueRectangle(rectangle);
 		VueRectangle vueRectangle2 = new VueRectangle(rectangle2);

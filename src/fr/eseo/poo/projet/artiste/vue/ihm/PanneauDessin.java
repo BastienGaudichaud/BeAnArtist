@@ -125,6 +125,7 @@ public class PanneauDessin extends JPanel {
 	}
 
 	private void dissocierOutil() {
+		this.getOutilCourant().setVueFormeSelectionnee();
 		this.getOutilCourant().destroy();
 		this.getOutilCourant().setPanneauDessin(null);
 		this.removeMouseListener(getOutilCourant());

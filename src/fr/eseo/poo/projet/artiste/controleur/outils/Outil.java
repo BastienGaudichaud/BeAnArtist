@@ -8,6 +8,7 @@ import java.io.Serializable;
 import javax.swing.event.MouseInputListener;
 
 import fr.eseo.poo.projet.artiste.modele.Coordonnees;
+import fr.eseo.poo.projet.artiste.vue.formes.VueForme;
 import fr.eseo.poo.projet.artiste.vue.ihm.PanneauDessin;
 
 public abstract class Outil implements MouseInputListener, KeyListener, Serializable {
@@ -16,6 +17,8 @@ public abstract class Outil implements MouseInputListener, KeyListener, Serializ
 	private Coordonnees debut;
 	private Coordonnees fin;
 	protected PanneauDessin panneauDessin;
+	protected VueForme vueFormeSelectionnee;
+
 
 	public Coordonnees getDebut() {
 		return this.debut;
@@ -90,6 +93,9 @@ public abstract class Outil implements MouseInputListener, KeyListener, Serializ
 		
 	}
 
+	public void setVueFormeSelectionnee() {
+		this.vueFormeSelectionnee = null;
+	}
 
 	public void destroy() {
 	}
