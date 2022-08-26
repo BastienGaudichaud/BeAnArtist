@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import fr.eseo.poo.projet.artiste.vue.ihm.PanneauDessin;
@@ -17,6 +19,7 @@ public class ActionEnregister extends AbstractAction {
 	private PanneauDessin panneauDessin;	
 	private JFrame fenetre;
 	private JFileChooser selecteur;
+	private JFrame fenetre2;
 
 	public ActionEnregister(PanneauDessin panneauDessin) {
 		super(NOM_ACTION);
@@ -52,6 +55,14 @@ public class ActionEnregister extends AbstractAction {
 		try {
 			enregistreur.enregistreDessin(nomFichier, panneauDessin.getVueFormes());
 			fenetre.dispose();
+			fenetre2 = new JFrame();
+			JLabel labelTexte = new JLabel("Fichier enregisté sous le nom : " + nomFichier);
+			labelTexte.setHorizontalAlignment(SwingConstants.CENTER);
+			fenetre2.add(labelTexte);
+			fenetre2.pack();
+			fenetre2.setSize(300, 100);
+			fenetre2.setLocationRelativeTo(null);
+			fenetre2.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
