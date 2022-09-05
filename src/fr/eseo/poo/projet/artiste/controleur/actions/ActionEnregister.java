@@ -60,7 +60,6 @@ public class ActionEnregister extends AbstractAction {
 			labelTexte.setHorizontalAlignment(SwingConstants.CENTER);
 			fenetre2.add(labelTexte);
 			fenetre2.pack();
-			fenetre2.setSize(300, 100);
 			fenetre2.setLocationRelativeTo(null);
 			fenetre2.setVisible(true);
 		} catch (Exception e) {

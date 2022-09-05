@@ -78,6 +78,7 @@ public class LecteurSVG {
 				vue.getForme().setCouleurContour(lisCouleur1(noeud));
 				vue.getForme().setCouleurRemplissage(lisCouleur2(noeud));
 				vue.getForme().setEpaisseur(lisEpaisseur(noeud));
+				vue.getForme().setAngle(lisAngle(noeud));
 			}
 		}
 		return dessin;
@@ -299,6 +300,24 @@ public class LecteurSVG {
 			return epaisseur;
 		} catch (NumberFormatException | XPathExpressionException e) {
 			return Forme.EPAISSEUR_PAR_DEFAUT;
+		}
+	}
+
+	public int lisAngle(Node noeud) {
+		try {
+			String test = (String) xpath.evaluate("@transform", noeud, STRING);
+			if (test.contains("rotate")) {
+				test = test.replace("rotate(", "");
+				test = test.replace(")", "");
+				test = test.split(" ")[0];	
+				return Integer.parseInt(test);
+			}
+			else {
+				return 0;
+			}
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
+			return 0;
 		}
 	}
 }

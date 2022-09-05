@@ -119,7 +119,14 @@ public class EnregistreurSVG {
 			ecritTexteFin(forme, redacteur);
 		} else {
 			int epaisseur = forme.getEpaisseur();
-			redacteur.write(" stroke-width='" + epaisseur + "'/>\n");
+			redacteur.write(" stroke-width='" + epaisseur + "' ");
+			int angle = forme.getAngle();
+			if(angle != 0) {
+				double x = forme.getPosition().getAbscisse() + forme.getLargeur() / 2;
+				double y = forme.getPosition().getOrdonnee() + forme.getHauteur() / 2;
+				redacteur.write("transform='rotate(" + angle + " " + x + " " + y + ")' ");
+			}
+			redacteur.write("/>\n");
 		}
 	}
 
@@ -132,6 +139,12 @@ public class EnregistreurSVG {
 
 	private void ecritTexteFin(Forme forme, Writer redacteur) throws IOException {
 		redacteur.write(" font-weight='bold'");
+		int angle = forme.getAngle();
+		if(angle != 0) {
+			double x = forme.getPosition().getAbscisse() + forme.getLargeur() / 2;
+			double y = forme.getPosition().getOrdonnee() + forme.getLargeur() / 2;
+			redacteur.write("transform='rotate(" + angle + " " + x + " " + y + ")'");
+		}
 		String texte = forme.getTexte();
 		String[] textes = texte.split("\\R");
 		if(textes.length == 1) {
